@@ -22,7 +22,7 @@ class NoteTodoDB {
   Future<Database> initDb() async {
     String path = join(await getDatabasesPath(), "notetodo.db");
     Database database = await openDatabase(path,
-        version: 5, onCreate: _onCreate, onUpgrade: _onUpgrade);
+        version: 16, onCreate: _onCreate, onUpgrade: _onUpgrade);
     return database;
   }
 
@@ -42,7 +42,7 @@ class NoteTodoDB {
         $idColumn INTEGER PRIMARY KEY AUTOINCREMENT,
         $titleColumn TEXT,
         $dateColumn TEXT,
-        $stateColumn INTEGER DEFAULT 0
+        $stateColumn BOOLEAN DEFAULT 0
       )
     ''');
   }

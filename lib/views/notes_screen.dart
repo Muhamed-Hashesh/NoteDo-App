@@ -52,9 +52,11 @@ class NotesScreen extends StatelessWidget {
                 }),
               );
               if (noteContent != null) {
+                controller.deleteNote(controller.notesList[index].id);
                 int originalIndex =
                     controller.notesList.indexOf(controller.notesList[index]);
                 controller.notesList.removeAt(originalIndex);
+
                 if (noteContent != null && noteContent[0] != '' ||
                     noteContent[1] != '') {
                   await controller.addNote(

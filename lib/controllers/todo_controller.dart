@@ -76,11 +76,19 @@ class TodoController extends GetxController {
 
   // Define checkBoxSelected method
   void checkBoxSelected(bool? value, int id) async {
-    isChecked.value = value ?? false;
     todosList[id].isCompleted = value!;
     await _database.updateTodoStatus(
         todosList[id].id, todosList[id].isCompleted);
 
     todosList.refresh();
+  }
+
+  goCompleted(bool isCompleted) {
+    if (isCompleted == 1) {
+      isChecked.value = true;
+    } else {
+      isChecked.value = false;
+    }
+    return isChecked.value;
   }
 }
