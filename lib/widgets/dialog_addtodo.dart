@@ -6,12 +6,10 @@ class AddTodoTaskDialog extends StatelessWidget {
   const AddTodoTaskDialog({
     super.key,
     required this.onSave,
-    required this.mycontroller, required this.isChecked,
+    required this.mycontroller,
   });
 
   final VoidCallback onSave;
-  final bool isChecked;
-
 
   final TextEditingController mycontroller;
 

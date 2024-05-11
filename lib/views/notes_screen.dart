@@ -52,23 +52,18 @@ class NotesScreen extends StatelessWidget {
                 }),
               );
               if (noteContent != null) {
-                // int originalIndex =
-                //     controller.notesList.indexOf(controller.notesList[index]);
-                // controller.notesList.removeAt(originalIndex);
-
-                controller.deleteNote(controller.notesList[index].id);
-                controller.updateNote(
-                  controller.notesList[index].id,
-                  noteContent[0],
-                  noteContent[1],
-                  DateTime.now(),
-                  true,
-                );
-
-                final updatedNote = controller.notesList
-                    .removeAt(controller.notesList[index].id);
-                // Insert the updated note at the beginning of the list
-                controller.notesList.insert(0, updatedNote);
+                int originalIndex =
+                    controller.notesList.indexOf(controller.notesList[index]);
+                controller.notesList.removeAt(originalIndex);
+                if (noteContent != null && noteContent[0] != '' ||
+                    noteContent[1] != '') {
+                  await controller.addNote(
+                    noteContent[0],
+                    noteContent[1],
+                    DateTime.now(),
+                    true,
+                  );
+                }
               }
             },
             child: NoteAndTodoItemCardSlidable(

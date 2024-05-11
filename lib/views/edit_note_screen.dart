@@ -31,8 +31,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
     LineIcons.alignCenter,
   ];
 
-  final NotesController noteTodoController =
-      Get.put(NotesController()); // تهيئة الكنترولر
+  final NotesController noteTodoController = Get.put(NotesController());
 
   @override
   void initState() {
@@ -128,24 +127,9 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
           ),
           GestureDetector(
             onTap: () async {
-              if (widget.noteCardModel != null) {
-                await noteTodoController.addNote(
-                  titleController.text,
-                  contentController.text,
-                  DateTime.now(),
-                  true,
-                );
-              } else {
-                await noteTodoController.addNote(
-                  titleController.text,
-                  contentController.text,
-                  DateTime.now(),
-                  true,
-                );
-              }
-              Navigator.pop(context);
-              // return Navigator.pop(
-              //   context, [titleController.text, contentController.text]);
+              
+              Navigator.pop(
+                  context, [titleController.text, contentController.text]);
             },
             child: Container(
               alignment: Alignment.center,

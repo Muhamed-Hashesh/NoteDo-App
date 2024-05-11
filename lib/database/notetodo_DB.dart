@@ -95,21 +95,6 @@ class NoteTodoDB {
     return result;
   }
 
-  Future<Map<String, dynamic>> getData(int noteId) async {
-    Database? tempDb = await db;
-    List<Map<String, dynamic>> result = await tempDb!.query(
-      noteTable,
-      where: '$idColumn = ?',
-      whereArgs: [noteId],
-    );
-
-    if (result.isNotEmpty) {
-      return result.first;
-    } else {
-      throw Exception('Note not found');
-    }
-  }
-
   Future<int> deleteData(int noteId) async {
     Database? tempDb = await db;
     int response = await tempDb!.delete(
@@ -157,21 +142,6 @@ class NoteTodoDB {
     Database? tempDb = await db;
     List<Map<String, dynamic>> result = await tempDb!.query(todoTable);
     return result;
-  }
-
-  Future<Map<String, dynamic>> getTodoById(int id) async {
-    Database? tempDb = await db;
-    List<Map<String, dynamic>> result = await tempDb!.query(
-      todoTable,
-      where: '$idColumn = ?',
-      whereArgs: [id],
-    );
-
-    if (result.isNotEmpty) {
-      return result.first;
-    } else {
-      throw Exception('Todo not found');
-    }
   }
 
   Future<int> deleteTodo(int id) async {

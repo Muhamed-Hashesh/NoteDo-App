@@ -77,18 +77,13 @@ class _NoteAndTodoItemCardState extends State<NoteAndTodoItemCard> {
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
               'Edited : ${DateFormat('EEE MMM d, yyyy h:mm a').format(widget.date)}',
-              style: TextStyle(
-                  fontSize: 12),
+              style: TextStyle(fontSize: 12),
             ),
           ),
-          trailing: const Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Ionicons.ios_archive_outline,
-                color: Colors.white,
-              ),
-            ],
+          trailing: Icon(
+            Ionicons.ios_create,
+            color: Colors.blue,
+            size: 32,
           ),
         ),
       ),

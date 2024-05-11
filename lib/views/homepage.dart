@@ -138,7 +138,8 @@ class _HomeScreenState extends State<HomeScreen> {
               MaterialPageRoute(builder: (context) {
             return EditNoteScreen();
           }));
-          if (noteContent != null) {
+          if (noteContent != null && noteContent[0] != '' ||
+              noteContent[1] != '') {
             await noteTodoController.addNote(
               noteContent[0],
               noteContent[1],
@@ -163,7 +164,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       TextField(
                         controller: _titleController,
-                        // style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           hintText: 'Enter Task',
                           border: OutlineInputBorder(
@@ -191,7 +191,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   DateTime.now(),
                                   false,
                                 );
-                                setState(() {});
                               }
                               Navigator.of(context).pop();
                               _titleController.clear();

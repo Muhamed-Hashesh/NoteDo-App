@@ -1,8 +1,8 @@
 class TodoCardModel {
-  final String title;
-  final DateTime date;
+  late final String title;
+  late final DateTime date;
   final int id;
-  final bool isCompleted;
+  bool isCompleted;
 
   TodoCardModel({
     required this.title,
