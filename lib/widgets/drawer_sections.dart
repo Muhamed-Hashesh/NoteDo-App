@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
+import 'package:get/get.dart';
 import 'package:notedo_app/views/archived_page.dart';
 import 'package:notedo_app/views/notes_screen.dart';
 import 'package:notedo_app/views/todo_screen.dart';
@@ -10,13 +11,13 @@ class Sections extends StatelessWidget {
     super.key,
     required this.listLength,
     required this.listOfContent,
-    required this.isWhiteMode,
+
     this.router,
   });
 
   final int listLength;
   final List listOfContent;
-  final bool isWhiteMode;
+
   final Widget? router;
 
   @override
@@ -28,13 +29,17 @@ class Sections extends StatelessWidget {
           listLength,
           (index) => GestureDetector(
             onTap: () {
-              Navigator.pop(context); // Close the drawer
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
+              Get.back(); // Close the drawer
+
+              // Replace Navigator.push with Get.to
+// Also remove the commented lines if not needed
+
+              Get.to(() {
                 // Check the text of the tapped item
                 final String text = listOfContent[index]['text'];
                 if (text == 'Notes') {
                   return NotesScreen(
-                    isWhiteMode: isWhiteMode,
+                    // isWhiteMode: isWhiteMode,
                     hasAppBar: true,
                     title: 'Your Notes',
                   );
@@ -42,25 +47,26 @@ class Sections extends StatelessWidget {
                   return TodoScreen(
                     hasAppBar: true,
                     title: 'Your Todos List',
-                    isWhiteMode: isWhiteMode,
+                    // isWhiteMode: isWhiteMode,
                   );
                 } else if (text == 'Archive') {
                   // Handle other cases, if needed
                   return const ArchivedScreen();
                 } else if (text == 'Translate') {
                   // Handle other cases, if needed
-                  return TranslatorScreen(isWhiteMode: isWhiteMode);
+                  return TranslatorScreen();
                 } else {
-                  return listOfContent[index]['route'];
+                  // Return a default widget or widget function
+                  return Container(); // Example default widget
                 }
-              }));
+              }, duration: Duration(milliseconds: 1000));
+
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               width: double.infinity,
-              color: isWhiteMode
-                  ? const Color.fromARGB(255, 214, 214, 214).withOpacity(0.8)
-                  : const Color(0xFF1c1d1f),
+              color: Theme.of(context).colorScheme.secondary,
+              
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -84,7 +90,7 @@ class Sections extends StatelessWidget {
                       Text(
                         listOfContent[index]['text'],
                         style: TextStyle(
-                          color: isWhiteMode ? Colors.black : Colors.white,
+                          
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
@@ -93,9 +99,11 @@ class Sections extends StatelessWidget {
                   ),
                   Icon(
                     FontAwesome.caret_right,
-                    color: isWhiteMode
-                        ? Colors.black.withOpacity(0.2)
-                        : Colors.white.withOpacity(0.2),
+                    color:
+                        Theme.of(context)
+                            .colorScheme
+                            .onBackground
+                            .withOpacity(0.5),
                     size: 18,
                   ),
                 ],

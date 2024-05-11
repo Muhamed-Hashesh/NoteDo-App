@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
+import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:notedo_app/controllers/note_controller.dart';
 import 'package:notedo_app/models/note_model.dart';
 
 class EditNoteScreen extends StatefulWidget {
-  const EditNoteScreen(
-      {super.key, required this.isWhiteMode, this.noteCardModel});
-  final bool isWhiteMode;
+  const EditNoteScreen({
+    super.key,
+    this.noteCardModel,
+  });
+
   final NoteCardModel? noteCardModel;
 
   @override
@@ -26,6 +30,9 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
     LineIcons.alignLeft,
     LineIcons.alignCenter,
   ];
+
+  final NotesController noteTodoController =
+      Get.put(NotesController()); // تهيئة الكنترولر
 
   @override
   void initState() {
@@ -65,9 +72,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
             margin: const EdgeInsets.all(20),
             height: 65,
             decoration: BoxDecoration(
-              color: widget.isWhiteMode
-                  ? const Color.fromARGB(255, 214, 214, 214).withOpacity(0.8)
-                  : const Color.fromARGB(255, 49, 49, 49),
+              color: Theme.of(context).colorScheme.secondary,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Row(
@@ -79,7 +84,6 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
                   icon: Icon(
                     iconList[index],
                     size: 24,
-                    color: widget.isWhiteMode ? Colors.black : Colors.white,
                   ),
                   onPressed: () {
                     setState(() {
@@ -99,18 +103,17 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
               children: [
                 TextField(
                   controller: titleController,
-                  style: TextStyle(
-                      color: widget.isWhiteMode ? Colors.black : Colors.white,
-                      fontSize: 30),
+                  style: TextStyle(fontSize: 30),
                   decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Title',
-                      hintStyle: TextStyle(color: Colors.grey, fontSize: 30)),
+                      hintStyle: TextStyle(
+                          // color: Colors.grey,
+                          fontSize: 30)),
                 ),
                 TextField(
                   controller: contentController,
-                  style: TextStyle(
-                      color: widget.isWhiteMode ? Colors.black : Colors.white),
+                  style: TextStyle(),
                   maxLines: null,
                   decoration: const InputDecoration(
                     border: InputBorder.none,
@@ -124,8 +127,26 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
             ),
           ),
           GestureDetector(
-            onTap: () => Navigator.pop(
-                context, [titleController.text, contentController.text]),
+            onTap: () async {
+              if (widget.noteCardModel != null) {
+                await noteTodoController.addNote(
+                  titleController.text,
+                  contentController.text,
+                  DateTime.now(),
+                  true,
+                );
+              } else {
+                await noteTodoController.addNote(
+                  titleController.text,
+                  contentController.text,
+                  DateTime.now(),
+                  true,
+                );
+              }
+              Navigator.pop(context);
+              // return Navigator.pop(
+              //   context, [titleController.text, contentController.text]);
+            },
             child: Container(
               alignment: Alignment.center,
               height: 43,

@@ -6,15 +6,14 @@ class AddTodoTaskDialog extends StatelessWidget {
   const AddTodoTaskDialog({
     super.key,
     required this.onSave,
-    required this.isWhiteMode,
-    required this.mycontroller,
+    required this.mycontroller, required this.isChecked,
   });
 
   final VoidCallback onSave;
-  final bool isWhiteMode;
+  final bool isChecked;
+
 
   final TextEditingController mycontroller;
-  // final TextEditingController _titleController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class AddTodoTaskDialog extends StatelessWidget {
         children: [
           TextField(
             controller: mycontroller,
-            style: TextStyle(color: isWhiteMode ? Colors.black : Colors.white),
+            
             decoration: InputDecoration(
               hintText: 'Enter Task',
               border: OutlineInputBorder(

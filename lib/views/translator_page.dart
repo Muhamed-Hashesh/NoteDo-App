@@ -4,8 +4,11 @@ import 'package:line_icons/line_icons.dart';
 import 'package:translator/translator.dart';
 
 class TranslatorScreen extends StatefulWidget {
-  const TranslatorScreen({Key? key, required this.isWhiteMode});
-  final bool isWhiteMode;
+  const TranslatorScreen({
+    Key? key,
+    // required this.isWhiteMode
+  });
+  // final bool isWhiteMode;
 
   @override
   State<TranslatorScreen> createState() => _TranslatorScreenState();
@@ -32,44 +35,44 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
             // crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                
                 margin: const EdgeInsets.only(top: 50, bottom: 24),
                 width: 100,
                 height: 100,
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.2),
+                  color: Color.fromARGB(255, 49, 49, 49),
                   border: Border.all(
                     width: 20,
-                    color: Colors.black.withOpacity(0.2),
+                    color: Color.fromARGB(255, 49, 49, 49),
                     strokeAlign: BorderSide.strokeAlignOutside,
                   ),
                   borderRadius: BorderRadius.circular(100),
                 ),
                 child: const Icon(
-                  
                   Ionicons.language,
                   size: 90,
                 ),
               ),
               Padding(
-
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   'NoteDo Translator',
                   style: TextStyle(
-
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     height: 1.5,
-                    color: widget.isWhiteMode ? Colors.black : Colors.white,
+                    // color:
+                    //     // widget.isWhiteMode ? Colors.black :
+                    //     Colors.white,
                   ),
                 ),
               ),
               TextField(
                 scrollController: ScrollController(),
                 style: TextStyle(
-                  color: widget.isWhiteMode ? Colors.black : Colors.white,
-                ),
+                    // color:
+                    //     // widget.isWhiteMode ? Colors.black :
+                    //     Colors.white,
+                    ),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -89,10 +92,13 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                 children: [
                   DropdownButton<String>(
                     style: TextStyle(
-                      color: widget.isWhiteMode ? Colors.black : Colors.white,
+                      color: Theme.of(context).colorScheme.onBackground,
+                      // widget.isWhiteMode ? Colors.black :
+                      // Colors.white,
                     ),
-                    dropdownColor:
-                        widget.isWhiteMode ? Colors.white : Colors.black,
+                    dropdownColor: Theme.of(context).colorScheme.secondary,
+                    // widget.isWhiteMode ? Colors.white :
+
                     value: inputLanguage,
                     items: <String>[
                       'af',
@@ -216,10 +222,11 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                   const Icon(LineIcons.arrowRight),
                   DropdownButton<String>(
                     style: TextStyle(
-                      color: widget.isWhiteMode ? Colors.black : Colors.white,
+                      color: Theme.of(context).colorScheme.onBackground,
+                      // widget.isWhiteMode ? Colors.black :
+                      // Colors.white,
                     ),
-                    dropdownColor:
-                        widget.isWhiteMode ? Colors.white : Colors.black,
+                    dropdownColor: Theme.of(context).colorScheme.secondary,
                     value: outputLanguage,
                     items: <String>[
                       'af',
@@ -346,8 +353,10 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
                 controller: outputController,
                 scrollController: ScrollController(),
                 style: TextStyle(
-                  color: widget.isWhiteMode ? Colors.black : Colors.white,
-                ),
+                    // color:
+                    //     // widget.isWhiteMode ? Colors.black :
+                    //     Colors.white,
+                    ),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -376,24 +385,22 @@ class _TranslatorScreenState extends State<TranslatorScreen> {
   }
 }
 
-
-
 // GestureDetector(
-              //   onTap: translateText,
-              //   child: Container(
-              //     alignment: Alignment.center,
-              //     height: 43,
-              //     margin: const EdgeInsets.symmetric(
-              //       horizontal: 20,
-              //       vertical: 40,
-              //     ),
-              //     decoration: BoxDecoration(
-              //       color: Colors.blue,
-              //       borderRadius: BorderRadius.circular(10),
-              //     ),
-              //     child: const Text(
-              //       'Translate',
-              //       style: TextStyle(color: Colors.white),
-              //     ),
-              //   ),
-              // ),
+//   onTap: translateText,
+//   child: Container(
+//     alignment: Alignment.center,
+//     height: 43,
+//     margin: const EdgeInsets.symmetric(
+//       horizontal: 20,
+//       vertical: 40,
+//     ),
+//     decoration: BoxDecoration(
+//       color: Colors.blue,
+//       borderRadius: BorderRadius.circular(10),
+//     ),
+//     child: const Text(
+//       'Translate',
+//       style: TextStyle(color: Colors.white),
+//     ),
+//   ),
+// ),

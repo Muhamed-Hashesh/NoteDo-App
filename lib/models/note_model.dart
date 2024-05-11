@@ -3,53 +3,35 @@ class NoteCardModel {
   final String content;
   final DateTime date;
   final int id;
-  final bool hasContent;
+  final bool isCompleted; 
 
   NoteCardModel({
     required this.title,
     required this.content,
     required this.date,
     required this.id,
-    this.hasContent = true,
+    required this.isCompleted,
   });
-}
 
-List<NoteCardModel> notesList = [
-  NoteCardModel(
-    id: 0,
-    title: 'Homework',
-    content:
-        'add and do your homework add and do your homework add and do your homework',
-    date: DateTime(2024, 1, 1, 34, 5),
-    hasContent: true,
-  ),
-  NoteCardModel(
-    id: 1,
-    title: 'Tasks',
-    content: 'tesks of sections',
-    date: DateTime(2024, 1, 1, 34, 5),
-    hasContent: true,
-  ),
-  // NoteCardModel(
-  //   id: 2,
-  //   title: 'Remindar',
-  //   content: 'Don\'t do any thing',
-  //   date: DateTime(2024, 1, 1, 34, 5),
-  //   hasContent: true,
-  // ),
-  // NoteCardModel(
-  //   id: 3,
-  //   title: 'Note name',
-  //   content:
-  //       'note cotent will be added here later note cotent will be added here later note cotent will be added here later ',
-  //   date: DateTime(2024, 1, 1, 34, 5),
-  //   hasContent: true,
-  // ),
-  // NoteCardModel(
-  //   id: 4,
-  //   title: 'Action',
-  //   content: 'no',
-  //   date: DateTime(2023, 1, 1, 60, 5),
-  //   hasContent: true,
-  // ),
-];
+  // Factory method to create NoteCardModel from map
+  factory NoteCardModel.fromMap(Map<String, dynamic> map) {
+    return NoteCardModel(
+      title: map['title'],
+      content: map['content'],
+      date: DateTime.parse(map['date']),
+      id: map['id'],
+      isCompleted: map['state'] == 1, // Map database state to isCompleted
+    );
+  }
+
+  // Method to convert NoteCardModel to map
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'content': content,
+      'date': date.toIso8601String(),
+      'id': id,
+      'state': isCompleted ? 1 : 0, // Map isCompleted to database state
+    };
+  }
+}

@@ -5,8 +5,11 @@ import 'package:notedo_app/json/drawer_items_json.dart';
 import 'package:notedo_app/widgets/drawer_sections.dart';
 
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({super.key, required this.isWhiteMode});
-  final bool isWhiteMode;
+  const CustomDrawer({
+    super.key,
+
+  });
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +40,14 @@ class CustomDrawer extends StatelessWidget {
               fontSize: 24,
               fontWeight: FontWeight.bold,
               height: 1.5,
-              color: isWhiteMode ? Colors.black : Colors.white,
+              
             ),
           ),
           Text(
             'Version 1.0.0',
             style: TextStyle(
-              color: isWhiteMode
-                  ? Colors.black.withOpacity(0.5)
-                  : Colors.white.withOpacity(0.5),
-            ),
+               
+                ),
           ),
           const SizedBox(height: 32),
           Expanded(
@@ -55,13 +56,12 @@ class CustomDrawer extends StatelessWidget {
                 Sections(
                   listLength: sectionOneList.length,
                   listOfContent: sectionOneList,
-                  isWhiteMode: isWhiteMode,
+
                 ),
                 Sections(
                   listLength: sectionTwoList.length,
                   listOfContent: sectionTwoList,
-                  isWhiteMode: isWhiteMode,
-                  
+
                 ),
               ],
             ),

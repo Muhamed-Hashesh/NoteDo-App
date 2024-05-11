@@ -13,7 +13,6 @@ class NoteAndTodoItemCardSlidable extends StatefulWidget {
     required this.date,
     required this.deleteNoteMethod,
     this.leading = false,
-    required this.isWhiteMode,
     this.isCecked = false,
     required this.onChanged,
     
@@ -27,9 +26,6 @@ class NoteAndTodoItemCardSlidable extends StatefulWidget {
   final Function(bool?)? onChanged;
   final bool leading;
   final bool isCecked;
-  
-
-  final bool isWhiteMode;
 
   @override
   State<NoteAndTodoItemCardSlidable> createState() =>
@@ -56,14 +52,12 @@ class _NoteAndTodoItemCardSlidableState
         child: PageStorage(
           bucket: PageStorageBucket(),
           child: NoteAndTodoItemCard(
-
             isCecked: widget.isCecked,
             leading: widget.leading,
             hasContent: widget.hasContent,
             noteTitle: widget.noteTitle,
             noteContent: widget.noteContent,
             date: widget.date,
-            isWhiteMode: widget.isWhiteMode,
             onChanged: widget.onChanged,
           ),
         ));

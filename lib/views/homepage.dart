@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
-import 'package:notedo_app/json/todo_list_model.dart';
-import 'package:notedo_app/models/note_model.dart';
+import 'package:get/get.dart';
+import 'package:notedo_app/controllers/change_theme_controller.dart';
+import 'package:notedo_app/controllers/note_controller.dart';
+import 'package:notedo_app/controllers/todo_controller.dart';
 import 'package:notedo_app/views/edit_note_screen.dart';
 import 'package:notedo_app/views/notes_screen.dart';
 import 'package:notedo_app/views/todo_screen.dart';
@@ -9,12 +11,9 @@ import 'package:notedo_app/widgets/custom_button.dart';
 import 'package:notedo_app/widgets/custom_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen(
-      {super.key, required this.changeAppTheme, required this.isWhiteMode});
-
-  final Function() changeAppTheme;
-
-  final bool isWhiteMode;
+  HomeScreen({
+    super.key,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -26,9 +25,13 @@ class _HomeScreenState extends State<HomeScreen> {
     'Todos',
   ];
   final TextEditingController _titleController = TextEditingController();
+  final ChangeAppThemeController getxController =
+      Get.put<ChangeAppThemeController>(ChangeAppThemeController());
+  final NotesController noteTodoController =
+      Get.put<NotesController>(NotesController());
 
-  List noteListFitched = [];
-  // List todoListFitched = [];
+  final TodoController todoController =
+      Get.put<TodoController>(TodoController());
 
   int currentIndex = 0;
   String title = 'Notes';
@@ -36,30 +39,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // super.build(context);
     return DefaultTabController(
       length: tabsList.length,
       child: Scaffold(
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        // backgroundColor: Colors.white,
         appBar: AppBar(
           centerTitle: true,
           title: Text(
             title,
-            // style: const TextStyle(color: Colors.black),
           ),
           toolbarHeight: 80,
           leading: Builder(builder: (context) {
             return IconButton(
               icon: const Icon(
                 Icons.sort,
-                // color: Colors.black,
                 size: 30,
               ),
               onPressed: () => Scaffold.of(context).openDrawer(),
             );
           }),
-          // backgroundColor: Colors.white,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(66),
             child: ClipRRect(
@@ -92,7 +89,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   tabs: List.generate(
                     tabsList.length,
                     (index) {
-                      // currentIndex = index;
                       return Tab(
                         child: Text(
                           tabsList[index],
@@ -110,26 +106,26 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.only(right: 20),
               child: IconButton(
                 icon: const Icon(Ionicons.ios_moon),
-                onPressed: widget.changeAppTheme,
+                onPressed: () {
+                  getxController.changeTheme();
+                },
                 tooltip: 'change theme',
               ),
             )
           ],
         ),
-        drawer: CustomDrawer(
-          isWhiteMode: widget.isWhiteMode,
-        ),
+        drawer: CustomDrawer(),
         body: TabBarView(
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              NotesScreen(
-                isWhiteMode: widget.isWhiteMode,
-              ),
-              TodoScreen(
-                isWhiteMode: widget.isWhiteMode,
-              ),
+              NotesScreen(),
+              TodoScreen(),
             ]),
-        floatingActionButton: getFloatingActionButton(),
+        floatingActionButton: GetBuilder<NotesController>(
+          builder: (_) {
+            return getFloatingActionButton();
+          },
+        ),
       ),
     );
   }
@@ -140,22 +136,16 @@ class _HomeScreenState extends State<HomeScreen> {
         if (tabsList[currentIndex] == 'Notes') {
           var noteContent = await Navigator.push(context,
               MaterialPageRoute(builder: (context) {
-            return EditNoteScreen(isWhiteMode: widget.isWhiteMode);
+            return EditNoteScreen();
           }));
           if (noteContent != null) {
-            setState(() {
-              notesList.insert(
-                0,
-                NoteCardModel(
-                  title: noteContent[0],
-                  content: noteContent[1],
-                  date: DateTime.now(),
-                  id: notesList.length,
-                  hasContent: true,
-                ),
-              );
-              // noteListFitched = notesList;
-            });
+            await noteTodoController.addNote(
+              noteContent[0],
+              noteContent[1],
+              DateTime.now(),
+              true,
+            );
+            // controller.deleteNote(controller.notesList[index].id);
           }
         } else {
           showDialog(
@@ -173,10 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       TextField(
                         controller: _titleController,
-                        style: TextStyle(
-                            color: widget.isWhiteMode
-                                ? Colors.black
-                                : Colors.white),
+                        // style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           hintText: 'Enter Task',
                           border: OutlineInputBorder(
@@ -197,19 +184,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             btnColor: Colors.red,
                           ),
                           MyCustomElevatedButton(
-                            onPresssed: () {
-                              setState(() {
-                                _titleController.text.isEmpty
-                                    ? null
-                                    : todoTasksList.insert(0, [
-                                        _titleController.text,
-                                        DateTime.now(),
-                                        false
-                                      ]);
-                              });
-
-                              _titleController.clear();
+                            onPresssed: () async {
+                              if (_titleController.text.isNotEmpty) {
+                                todoController.addTodo(
+                                  _titleController.text,
+                                  DateTime.now(),
+                                  false,
+                                );
+                                setState(() {});
+                              }
                               Navigator.of(context).pop();
+                              _titleController.clear();
                             },
                             label: 'Add',
                           ),

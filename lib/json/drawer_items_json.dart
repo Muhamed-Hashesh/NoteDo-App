@@ -24,6 +24,7 @@ List sectionOneList = [
     "color": const Color.fromARGB(255, 255, 0, 0),
   },
 ];
+
 List sectionTwoList = [
   {
     "icon": FontAwesome.share_alt_square,

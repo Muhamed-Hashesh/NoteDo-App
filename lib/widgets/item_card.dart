@@ -10,7 +10,6 @@ class NoteAndTodoItemCard extends StatefulWidget {
     this.hasContent = true,
     required this.noteContent,
     required this.date,
-    required this.isWhiteMode,
     this.leading = false,
     this.isCecked = false,
     required this.onChanged,
@@ -20,7 +19,6 @@ class NoteAndTodoItemCard extends StatefulWidget {
   final bool hasContent;
   final String noteContent;
   final DateTime date;
-  final bool isWhiteMode;
   final bool leading;
   final bool isCecked;
   final Function(bool?)? onChanged;
@@ -32,16 +30,8 @@ class NoteAndTodoItemCard extends StatefulWidget {
 class _NoteAndTodoItemCardState extends State<NoteAndTodoItemCard> {
   @override
   Widget build(BuildContext context) {
-    final Color backgroundColor = (widget.isWhiteMode
-        ? const Color.fromARGB(255, 214, 214, 214).withOpacity(0.8)
-        : const Color.fromARGB(255, 49, 49, 49));
-    // super.build(context);
     return Card(
       elevation: 0,
-      // color: getRandomColor(),
-      color: backgroundColor,
-      // color: Color.fromARGB(80, Random().nextInt(100) + 155,
-      //     Random().nextInt(100) + 155, Random().nextInt(100) + 155),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListTile(
@@ -63,9 +53,6 @@ class _NoteAndTodoItemCardState extends State<NoteAndTodoItemCard> {
                 widget.noteTitle,
                 style: TextStyle(
                   fontSize: 20,
-                  color: widget.isWhiteMode
-                      ? Colors.black.withOpacity(0.8)
-                      : Colors.white,
                   fontWeight: FontWeight.bold,
                   height: 1.5,
                 ),
@@ -77,9 +64,6 @@ class _NoteAndTodoItemCardState extends State<NoteAndTodoItemCard> {
                       widget.noteContent,
                       style: TextStyle(
                         fontSize: 15,
-                        color: widget.isWhiteMode
-                            ? Colors.black.withOpacity(0.5)
-                            : Colors.white.withOpacity(0.8),
                         fontWeight: FontWeight.normal,
                         height: 1.5,
                       ),
@@ -94,9 +78,6 @@ class _NoteAndTodoItemCardState extends State<NoteAndTodoItemCard> {
             child: Text(
               'Edited : ${DateFormat('EEE MMM d, yyyy h:mm a').format(widget.date)}',
               style: TextStyle(
-                  color: widget.isWhiteMode
-                      ? Colors.black.withOpacity(0.5)
-                      : Colors.white.withOpacity(0.6),
                   fontSize: 12),
             ),
           ),
