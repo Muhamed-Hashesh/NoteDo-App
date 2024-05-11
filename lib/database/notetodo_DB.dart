@@ -22,7 +22,7 @@ class NoteTodoDB {
   Future<Database> initDb() async {
     String path = join(await getDatabasesPath(), "notetodo.db");
     Database database = await openDatabase(path,
-        version: 4, onCreate: _onCreate, onUpgrade: _onUpgrade);
+        version: 5, onCreate: _onCreate, onUpgrade: _onUpgrade);
     return database;
   }
 
@@ -148,6 +148,19 @@ class NoteTodoDB {
     Database? tempDb = await db;
     int response = await tempDb!.delete(
       todoTable,
+      where: '$idColumn = ?',
+      whereArgs: [id],
+    );
+    return response;
+  }
+
+  Future<int> updateTodoStatus(int id, bool isCompleted) async {
+    Database? tempDb = await db;
+    int response = await tempDb!.update(
+      todoTable,
+      {
+        '$stateColumn': isCompleted ? 1 : 0,
+      },
       where: '$idColumn = ?',
       whereArgs: [id],
     );

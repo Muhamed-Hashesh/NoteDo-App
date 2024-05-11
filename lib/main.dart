@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.circularReveal,
       // themeMode: ThemeMode.light,
 
-      theme: lightTheme,
+      theme: darkTheme,
       darkTheme: darkTheme,
 
       // initialBinding: BindingsBuilder(() {

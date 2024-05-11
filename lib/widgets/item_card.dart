@@ -42,8 +42,9 @@ class _NoteAndTodoItemCardState extends State<NoteAndTodoItemCard> {
                   colorConfig: MSHColorConfig.fromCheckedUncheckedDisabled(
                     checkedColor: Colors.blue,
                   ),
-                  style: MSHCheckboxStyle.values[2],
+                  style: MSHCheckboxStyle.values[0],
                   onChanged: widget.onChanged!,
+                  duration: Duration(milliseconds: 300),
                 )
               : null,
           title: Column(
@@ -81,7 +82,7 @@ class _NoteAndTodoItemCardState extends State<NoteAndTodoItemCard> {
             ),
           ),
           trailing: Icon(
-            Ionicons.ios_create,
+            Ionicons.ios_create_outline,
             color: Colors.blue,
             size: 32,
           ),
