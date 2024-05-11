@@ -84,7 +84,7 @@ class _NoteAndTodoItemCardState extends State<NoteAndTodoItemCard> {
           trailing: Icon(
             Ionicons.ios_create_outline,
             color: Colors.blue,
-            size: 32,
+            size: 30,
           ),
         ),
       ),

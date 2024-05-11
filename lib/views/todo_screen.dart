@@ -47,7 +47,6 @@ class _TodoScreenState extends State<TodoScreen> {
               return GestureDetector(
                 onTap: () {
                   editTaskMethod(index);
-                  // isChecked = todoTasksList[index][2];
                   todoController.isChecked.value = todo.isCompleted;
                 },
                 child: NoteAndTodoItemCardSlidable(
@@ -119,7 +118,7 @@ class _TodoScreenState extends State<TodoScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  'Are you sure you want to delete this Note?',
+                  'Are you sure you want to delete this Task?',
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),

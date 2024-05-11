@@ -17,9 +17,10 @@ class MyApp extends StatelessWidget {
 
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.circularReveal,
-      // themeMode: ThemeMode.light,
 
-      theme: darkTheme,
+      themeMode: ThemeMode.system,
+
+      theme: lightTheme,
       darkTheme: darkTheme,
 
       // initialBinding: BindingsBuilder(() {

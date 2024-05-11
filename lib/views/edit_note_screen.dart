@@ -106,9 +106,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
                   decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Title',
-                      hintStyle: TextStyle(
-                          // color: Colors.grey,
-                          fontSize: 30)),
+                      hintStyle: TextStyle(color: Colors.grey, fontSize: 30)),
                 ),
                 TextField(
                   controller: contentController,
@@ -127,7 +125,6 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
           ),
           GestureDetector(
             onTap: () async {
-              
               Navigator.pop(
                   context, [titleController.text, contentController.text]);
             },

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 final ThemeData darkTheme = ThemeData(
   colorScheme: ColorScheme(
@@ -15,7 +14,6 @@ final ThemeData darkTheme = ThemeData(
     surface: Color.fromARGB(255, 49, 49, 49),
     onSurface: Colors.white,
   ),
-  textTheme: GoogleFonts.poppinsTextTheme(),
   cardTheme: CardTheme(color: const Color.fromARGB(255, 49, 49, 49)),
   appBarTheme: AppBarTheme(
     color: Colors.black,
@@ -36,7 +34,6 @@ final ThemeData lightTheme = ThemeData(
     surface: Colors.white,
     onSurface: Colors.black, //===============
   ),
-  textTheme: GoogleFonts.poppinsTextTheme(),
   cardTheme: CardTheme(
       color: const Color.fromARGB(255, 214, 214, 214).withOpacity(0.8)),
   appBarTheme: AppBarTheme(

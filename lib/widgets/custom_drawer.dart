@@ -7,9 +7,7 @@ import 'package:notedo_app/widgets/drawer_sections.dart';
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({
     super.key,
-
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +38,11 @@ class CustomDrawer extends StatelessWidget {
               fontSize: 24,
               fontWeight: FontWeight.bold,
               height: 1.5,
-              
             ),
           ),
           Text(
             'Version 1.0.0',
-            style: TextStyle(
-               
-                ),
+            style: TextStyle(),
           ),
           const SizedBox(height: 32),
           Expanded(
@@ -56,12 +51,10 @@ class CustomDrawer extends StatelessWidget {
                 Sections(
                   listLength: sectionOneList.length,
                   listOfContent: sectionOneList,
-
                 ),
                 Sections(
                   listLength: sectionTwoList.length,
                   listOfContent: sectionTwoList,
-
                 ),
               ],
             ),

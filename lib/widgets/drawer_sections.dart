@@ -31,9 +31,6 @@ class Sections extends StatelessWidget {
             onTap: () {
               Get.back(); // Close the drawer
 
-              // Replace Navigator.push with Get.to
-// Also remove the commented lines if not needed
-
               Get.to(() {
                 // Check the text of the tapped item
                 final String text = listOfContent[index]['text'];
@@ -90,7 +87,6 @@ class Sections extends StatelessWidget {
                       Text(
                         listOfContent[index]['text'],
                         style: TextStyle(
-                          
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
