@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
-import 'package:notedo_app/controllers/note_controller.dart';
+import 'package:notedo_app/controllers/getx/note_controller.dart';
 import 'package:notedo_app/views/edit_note_screen.dart';
 import 'package:notedo_app/widgets/custom_button.dart';
 import 'package:notedo_app/widgets/item_siidable.dart';

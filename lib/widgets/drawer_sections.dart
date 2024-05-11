@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
-import 'package:notedo_app/views/archived_page.dart';
+import 'package:notedo_app/views/calculator_page.dart';
 import 'package:notedo_app/views/notes_screen.dart';
 import 'package:notedo_app/views/todo_screen.dart';
 import 'package:notedo_app/views/translator_page.dart';
@@ -11,7 +11,6 @@ class Sections extends StatelessWidget {
     super.key,
     required this.listLength,
     required this.listOfContent,
-
     this.router,
   });
 
@@ -46,9 +45,9 @@ class Sections extends StatelessWidget {
                     title: 'Your Todos List',
                     // isWhiteMode: isWhiteMode,
                   );
-                } else if (text == 'Archive') {
+                } else if (text == 'Calculator') {
                   // Handle other cases, if needed
-                  return const ArchivedScreen();
+                  return const CalcScreen();
                 } else if (text == 'Translate') {
                   // Handle other cases, if needed
                   return TranslatorScreen();
@@ -57,13 +56,11 @@ class Sections extends StatelessWidget {
                   return Container(); // Example default widget
                 }
               }, duration: Duration(milliseconds: 1000));
-
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               width: double.infinity,
               color: Theme.of(context).colorScheme.secondary,
-              
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -95,11 +92,10 @@ class Sections extends StatelessWidget {
                   ),
                   Icon(
                     FontAwesome.caret_right,
-                    color:
-                        Theme.of(context)
-                            .colorScheme
-                            .onBackground
-                            .withOpacity(0.5),
+                    color: Theme.of(context)
+                        .colorScheme
+                        .onBackground
+                        .withOpacity(0.5),
                     size: 18,
                   ),
                 ],

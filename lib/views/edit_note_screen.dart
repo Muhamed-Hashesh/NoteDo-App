@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:notedo_app/controllers/note_controller.dart';
+import 'package:notedo_app/controllers/getx/note_controller.dart';
 import 'package:notedo_app/models/note_model.dart';
 
 class EditNoteScreen extends StatefulWidget {
@@ -125,15 +125,26 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
           ),
           GestureDetector(
             onTap: () async {
-              Navigator.pop(
-                  context, [titleController.text, contentController.text]);
+              if (titleController.text.isEmpty ||
+                  contentController.text.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Title or content can\'t be empty'),
+                  ),
+                );
+              } else {
+                Navigator.pop(
+                    context, [titleController.text, contentController.text]);
+              }
             },
             child: Container(
               alignment: Alignment.center,
               height: 43,
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
               decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(10)),
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: const Text(
                 'Save',
                 style: TextStyle(color: Colors.white),

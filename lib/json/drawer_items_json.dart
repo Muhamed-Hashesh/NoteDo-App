@@ -14,8 +14,8 @@ List sectionOneList = [
     "color": Colors.green,
   },
   {
-    "icon": Ionicons.ios_archive,
-    "text": "Archive",
+    "icon": Ionicons.ios_calculator,
+    "text": "Calculator",
     "color": const Color(0xFFFCAA26),
   },
   {

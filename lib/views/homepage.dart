@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
-import 'package:notedo_app/controllers/change_theme_controller.dart';
-import 'package:notedo_app/controllers/note_controller.dart';
-import 'package:notedo_app/controllers/todo_controller.dart';
+import 'package:notedo_app/controllers/getx/change_theme_controller.dart';
+import 'package:notedo_app/controllers/getx/note_controller.dart';
+import 'package:notedo_app/controllers/getx/todo_controller.dart';
 import 'package:notedo_app/views/edit_note_screen.dart';
 import 'package:notedo_app/views/notes_screen.dart';
 import 'package:notedo_app/views/todo_screen.dart';
@@ -32,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final TodoController todoController =
       Get.put<TodoController>(TodoController());
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   int currentIndex = 0;
   String title = 'Notes';
@@ -159,47 +161,58 @@ class _HomeScreenState extends State<HomeScreen> {
                     'Add Todo Task',
                     style: TextStyle(color: Colors.green, fontSize: 20),
                   ),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextField(
-                        controller: _titleController,
-                        decoration: InputDecoration(
-                          hintText: 'Enter Task',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: const BorderSide(
-                              color: Colors.white,
+                  content: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TextFormField(
+                          controller: _titleController,
+                          decoration: InputDecoration(
+                            hintText: 'Enter Task',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                color: Colors.white,
+                              ),
                             ),
                           ),
+                          validator: (String? value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Can\'t be empty';
+                            }
+                            return null;
+                          },
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          MyCustomElevatedButton(
-                            onPresssed: () => Navigator.pop(context),
-                            label: 'Cancle',
-                            btnColor: Colors.red,
-                          ),
-                          MyCustomElevatedButton(
-                            onPresssed: () async {
-                              if (_titleController.text.isNotEmpty) {
-                                todoController.addTodo(
-                                  _titleController.text,
-                                  DateTime.now(),
-                                  false,
-                                );
-                              }
-                              Navigator.of(context).pop();
-                              _titleController.clear();
-                            },
-                            label: 'Add',
-                          ),
-                        ],
-                      )
-                    ],
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            MyCustomElevatedButton(
+                              onPresssed: () => Navigator.pop(context),
+                              label: 'Cancle',
+                              btnColor: Colors.red,
+                            ),
+                            MyCustomElevatedButton(
+                              onPresssed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  if (_titleController.text.isNotEmpty) {
+                                    todoController.addTodo(
+                                      _titleController.text,
+                                      DateTime.now(),
+                                      false,
+                                    );
+                                  }
+                                  Navigator.of(context).pop();
+                                  _titleController.clear();
+                                }
+                              },
+                              label: 'Add',
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 );
               });
