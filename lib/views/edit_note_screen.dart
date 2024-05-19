@@ -125,11 +125,11 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
           ),
           GestureDetector(
             onTap: () async {
-              if (titleController.text.isEmpty ||
-                  contentController.text.isEmpty) {
+              if (titleController.text == '' && contentController.text == '') {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Title or content can\'t be empty'),
+                    duration: Duration(milliseconds: 800),
                   ),
                 );
               } else {

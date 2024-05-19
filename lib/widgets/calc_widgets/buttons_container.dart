@@ -15,8 +15,10 @@ class ButtonsContainer extends StatelessWidget {
     final screenHight = MediaQuery.sizeOf(context).height;
     return Container(
       height: screenHight * 0.59,
+      // height: screenHight * 0.598,
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
+      padding: EdgeInsets.symmetric(
+          horizontal: screenHight * 0.018, vertical: screenHight * 0.025),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
         color: AppColors.primaryColor,
@@ -58,7 +60,7 @@ class ButtonsContainer extends StatelessWidget {
                         (index) => buttonsList[index + 12],
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: List.generate(
@@ -69,7 +71,7 @@ class ButtonsContainer extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: 20),
+              const SizedBox(width: 10),
               const EqualButton()
             ],
           )
@@ -78,49 +80,3 @@ class ButtonsContainer extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-// class ButtonsContainer extends StatelessWidget {
-//   const ButtonsContainer({
-//     super.key,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final screenHight = MediaQuery.sizeOf(context).height;
-//     return Container(
-//       height: screenHight * 0.6,
-//       width: double.infinity,
-//       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
-//       decoration: const BoxDecoration(
-//         borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-//         color: AppColors.primaryColor,
-//       ),
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: List.generate(
-//           buttonsList.length ~/ 4,
-//           (index) {
-//             return Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: List.generate(
-//                 4,
-//                 (index) => buttonsList[4],
-//               ),
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
