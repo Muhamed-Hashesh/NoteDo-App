@@ -18,19 +18,18 @@ class MyApp extends StatelessWidget {
       create: (context) => CalculatorProvider(),
       child: GetMaterialApp(
         title: 'Notedo App',
-      
+
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.circularReveal,
-      
+
         // themeMode: ThemeMode.system,
-      
+
         theme: lightTheme,
         darkTheme: darkTheme,
-      
+
         // initialBinding: BindingsBuilder(() {
         //   Get.lazyPut<NoteTodoController>(() => NoteTodoController());
         // }),
-
         home: HomeScreen(),
       ),
     );
