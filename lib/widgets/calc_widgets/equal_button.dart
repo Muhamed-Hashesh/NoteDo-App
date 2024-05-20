@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:notedo_app/controllers/provider/calculator_provider.dart';
-import 'package:notedo_app/themes/colors.dart';
 import 'package:provider/provider.dart';
 
 class EqualButton extends StatelessWidget {
@@ -19,7 +18,7 @@ class EqualButton extends StatelessWidget {
         width: 70,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),
-          color: AppColors.secondaryColor,
+          color: Theme.of(context).colorScheme.primary,
         ),
         child: const Center(
           child: Text(

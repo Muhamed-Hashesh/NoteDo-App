@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:notedo_app/controllers/provider/calculator_provider.dart';
-import 'package:notedo_app/themes/colors.dart';
 import 'package:provider/provider.dart';
 
 class Button extends StatelessWidget {
@@ -20,11 +19,11 @@ class Button extends StatelessWidget {
           .setValue(label),
       child: Material(
         elevation: 3,
-        color: AppColors.secondary2Color,
+        color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(50),
         child: CircleAvatar(
           radius: 40,
-          backgroundColor: AppColors.secondary2Color,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
           child: Text(
             label,
             style: TextStyle(

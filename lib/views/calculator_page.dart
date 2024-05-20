@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:notedo_app/controllers/provider/calculator_provider.dart';
-import 'package:notedo_app/themes/colors.dart';
 import 'package:notedo_app/widgets/calc_widgets/buttons_container.dart';
 import 'package:notedo_app/widgets/calc_widgets/textfield.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +14,8 @@ class CalcScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: const Text('NoteDo Calculator'),
-            backgroundColor: AppColors.primaryColor,
+            centerTitle: true,
+            // backgroundColor: AppColors.primaryColor,
           ),
           // backgroundColor: Colors.black,
           body: Column(
@@ -30,7 +30,9 @@ class CalcScreen extends StatelessWidget {
                 child: Text(
                   calcProvider.resultLabel,
                   style: const TextStyle(
-                      fontSize: 32, color: AppColors.primaryColor),
+                    fontSize: 32,
+                    color: Colors.grey
+                  ),
                   textAlign: TextAlign.end,
                 ),
               ),

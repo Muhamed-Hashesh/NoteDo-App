@@ -30,9 +30,8 @@ class MyApp extends StatelessWidget {
         // initialBinding: BindingsBuilder(() {
         //   Get.lazyPut<NoteTodoController>(() => NoteTodoController());
         // }),
-      
+
         home: HomeScreen(),
-        // home: TranslatorScreen(),
       ),
     );
   }
