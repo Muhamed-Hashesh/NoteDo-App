@@ -6,8 +6,8 @@ import 'package:notedo_app/widgets/custom_button.dart';
 import 'package:notedo_app/widgets/dialog_addtodo.dart';
 import 'package:notedo_app/widgets/item_siidable.dart';
 
-class TodoScreen extends StatefulWidget {
-  const TodoScreen({
+class TodoScreen extends StatelessWidget {
+  TodoScreen({
     super.key,
     this.hasAppBar = false,
     this.title = '',
@@ -16,21 +16,19 @@ class TodoScreen extends StatefulWidget {
   final String title;
   final bool hasAppBar;
 
-  @override
-  State<TodoScreen> createState() => _TodoScreenState();
-}
-
-class _TodoScreenState extends State<TodoScreen> {
   final _mycontroller = TextEditingController();
+
   final TodoController todoController = Get.find<TodoController>();
+
   bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: widget.hasAppBar
+      appBar: hasAppBar
           ? AppBar(
               surfaceTintColor: Colors.transparent,
-              title: Text(widget.title),
+              title: Text(title),
             )
           : null,
       body: Obx(
@@ -65,12 +63,6 @@ class _TodoScreenState extends State<TodoScreen> {
       ),
     );
   }
-
-  // void checkBoxSelected(bool? value, int index) {
-  //   setState(() {
-  //     todoTasksList[index][2] = !todoTasksList[index][2];
-  //   });
-  // }
 
   void editTaskMethod(int index) {
     final TodoController controller = Get.find();

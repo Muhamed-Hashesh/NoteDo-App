@@ -2,24 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:notedo_app/controllers/getx/edit_note_controller.dart';
 import 'package:notedo_app/controllers/getx/note_controller.dart';
-import 'package:notedo_app/models/note_model.dart';
+import '../models/note_model.dart';
 
-class EditNoteScreen extends StatefulWidget {
-  const EditNoteScreen({
-    super.key,
-    this.noteCardModel,
-  });
-
+class EditNoteScreen extends StatelessWidget {
   final NoteCardModel? noteCardModel;
 
-  @override
-  State<EditNoteScreen> createState() => _EditNoteScreenState();
-}
+  EditNoteScreen({super.key, this.noteCardModel});
 
-class _EditNoteScreenState extends State<EditNoteScreen> {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController contentController = TextEditingController();
   IconData? selectedIcon;
 
   List<IconData> iconList = [
@@ -34,18 +25,11 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
   final NotesController noteTodoController = Get.put(NotesController());
 
   @override
-  void initState() {
-    if (widget.noteCardModel != null) {
-      titleController =
-          TextEditingController(text: widget.noteCardModel!.title);
-      contentController =
-          TextEditingController(text: widget.noteCardModel!.content);
-    }
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final EditNoteController editNoteController = Get.put(EditNoteController());
+    editNoteController.noteCardModel = noteCardModel;
+    editNoteController.onInit();
+
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
@@ -85,10 +69,10 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
                     size: 24,
                   ),
                   onPressed: () {
-                    setState(() {
-                      selectedIcon = iconList[index];
-                      contentController.text;
-                    });
+                    // setState(() {
+                    //   selectedIcon = iconList[index];
+                    //   contentController.text;
+                    // });
                   },
                 );
               }),
@@ -101,23 +85,22 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               children: [
                 TextField(
-                  controller: titleController,
+                  controller: editNoteController.titleController,
                   style: TextStyle(fontSize: 30),
                   decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Title',
-                      hintStyle: TextStyle(color: Colors.grey, fontSize: 30)),
+                    border: InputBorder.none,
+                    hintText: 'Title',
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 30),
+                  ),
                 ),
                 TextField(
-                  controller: contentController,
+                  controller: editNoteController.contentController,
                   style: TextStyle(),
                   maxLines: null,
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Type something here',
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
+                    hintStyle: TextStyle(color: Colors.grey),
                   ),
                 ),
               ],
@@ -125,7 +108,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
           ),
           GestureDetector(
             onTap: () async {
-              if (titleController.text == '' && contentController.text == '') {
+              if (!editNoteController.canSave()) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Title or content can\'t be empty'),
@@ -133,8 +116,10 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
                   ),
                 );
               } else {
-                Navigator.pop(
-                    context, [titleController.text, contentController.text]);
+                Navigator.pop(context, [
+                  editNoteController.titleController.text,
+                  editNoteController.contentController.text,
+                ]);
               }
             },
             child: Container(
